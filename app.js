@@ -4,11 +4,22 @@ import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
 import morgan from "morgan";
+import mongoose from "mongoose";
 import { router } from "./routes/routes.js";
 
 // To use __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Setup MongoDB Connection through Mongoose
+mongoose.set("strictQuery", "false");
+const { mongoDB } = process.env;
+
+async function connect() {
+  await mongoose.connect(mongoDB);
+}
+
+connect().catch((err) => console.log(err));
 
 // Server Initialization
 const app = express();
