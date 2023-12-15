@@ -3,7 +3,7 @@ import { Router } from "express";
 // Initialize router
 const router = Router();
 
-// Requests
+// GET request to display homepage with messages
 router.get("/");
 
 export { router };

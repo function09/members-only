@@ -6,7 +6,7 @@ const userArgs = process.argv.slice(2);
 
 const mongoDB = userArgs[0];
 
-const createUser = async (firstName, lastName, userName, password, membershipStatus) => {
+const createUser = async (firstName, lastName, userName, password, membershipStatus, isAdmin) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const userDetail = {
@@ -15,12 +15,22 @@ const createUser = async (firstName, lastName, userName, password, membershipSta
       userName: userName,
       password: hashedPassword,
       membershipStatus: membershipStatus,
+      isAdmin: isAdmin,
     };
     const newUser = new User(userDetail);
     await newUser.save();
   } catch (err) {
     console.log(err);
   }
+};
+
+const createMessage = async (title, message, timeStamp, user) => {
+  const messageDetail = {
+    title: title,
+    message: message,
+    timeStamp: timeStamp,
+    user: user,
+  };
 };
 
 main().catch((err) => console.log(err));
