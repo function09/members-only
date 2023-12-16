@@ -68,4 +68,14 @@ const submitSignupForm = [
   },
 ];
 
-export { displaySignUpPage, submitSignupForm };
+const displayMemberForm = (req, res, next) => {
+  res.render("passcode", { title: "What is the passcode?" });
+};
+
+const changeMembershipStatus = async (req, res, next) => {
+  const userMembershipStatus = await User.findById(req.body.id, "membershipStatus");
+  if (userMembershipStatus.membershipStatus === false) {
+    await User.findByIdAndUpdate(req.body.id, { membershipStatus: true });
+  }
+};
+export { displaySignUpPage, submitSignupForm, displayMemberForm, changeMembershipStatus };
