@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+
+    form(action="", method="post", id="signupform")
+        label(for="firstName") First Name:
+        input(type="text", name="firstName", id="firstName" required)
+        label(for="lastName") Last Name:
+        input(type="text", name="lastName", id="lastName" required)
+        label(for="email") E-mail
+        input(type="email", name="email", id="email" required)
+        label(for="password") Password:
+        input(type="password", name="password", id="password" required)
+        label(for="confirmPassword") Confirm Password:
+        input(type="password", name="confirmPassword", id="password" required)
+        input(type="submit", value="Submit")          
+    
+    if errors
+        ul 
+            for error in errors 
+                li= error.msg

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import displaySignUpPage from "../controllers/sign-upController.js";
+import { displaySignUpPage, submitSignupForm } from "../controllers/sign-upController.js";
 import displayMessages from "../controllers/homePageController.js";
 
 // Initialize router
@@ -10,5 +10,8 @@ router.get("/", displayMessages);
 
 // GET request to display sign-up page
 router.get("/sign-up", displaySignUpPage);
+
+// POST request to submit sign-up form
+router.post("/sign-up", submitSignupForm);
 
 export { router };
