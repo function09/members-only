@@ -1,5 +1,5 @@
 const displayMessages = (req, res, next) => {
-  res.send("Site Homepage");
+  res.render("homePage", { title: "Homepage" });
 };
 
 export default displayMessages;

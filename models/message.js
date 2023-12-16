@@ -1,4 +1,4 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
@@ -6,9 +6,9 @@ const messageSchema = new Schema({
   title: { type: String, required: true },
   message: { type: String, required: true },
   timeStamp: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: "Users", required: true },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-const message = mongoose.model("Message", messageSchema);
+const Message = mongoose.model("Message", messageSchema);
 
-export default message;
+export default Message;
