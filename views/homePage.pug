@@ -1,3 +1,30 @@
 extends layout 
 
 block content
+
+    if user && user.membershipStatus == true
+        h3 Hello #{user.firstName}
+        ul 
+            for message of messages 
+                .message 
+                    li.messageTitle #{message.title}
+                    li.message  #{message.message}
+                    li.messageAuthorAndDate #{message.user} #{message.timeStamp}
+        a(href="/create-message") Create A New Message
+    else if user && user.membershipStatus == false 
+        h3 Hello #{user.firstName}
+        ul 
+            for message of messages 
+                .message 
+                    li.messageTitle #{message.title}
+                    li.message  #{message.message}
+        a(href="/create-message") Create A New Message
+        a(href="/passcode")  Become a member
+    else
+        h3 Please log-in
+        ul
+            for message of messages
+                .message 
+                    li.messageTitle #{message.title}
+                    li.message #{message.message}
+        a(href="/log-in") Login

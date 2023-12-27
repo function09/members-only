@@ -69,13 +69,16 @@ const submitSignupForm = [
 ];
 
 const displayMemberForm = (req, res, next) => {
+  console.log(req.user.email);
   res.render("passcode", { title: "What is the passcode?" });
 };
 
 const changeMembershipStatus = async (req, res, next) => {
-  const userMembershipStatus = await User.findById(req.body.id, "membershipStatus");
-  if (userMembershipStatus.membershipStatus === false) {
-    await User.findByIdAndUpdate(req.body.id, { membershipStatus: true });
+  const user = await User.findOne({ email: req.user.email }, "membershipStatus");
+  console.log(user.membershipStatus, req.body.password);
+  if (user.membershipStatus === false && req.body.password === "fluffycat") {
+    await User.findOneAndUpdate({ email: req.user.email }, { membershipStatus: true }, { new: true });
   }
+  res.redirect("/");
 };
 export { displaySignUpPage, submitSignupForm, displayMemberForm, changeMembershipStatus };

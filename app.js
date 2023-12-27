@@ -5,6 +5,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import morgan from "morgan";
 import mongoose from "mongoose";
+import session from "express-session";
+import passport from "passport";
 import { router } from "./routes/routes.js";
 
 // To use __dirname
@@ -31,6 +33,9 @@ app.set("view engine", "pug");
 
 // Middleware
 app.use(express.json());
+app.use(session({ secret: "felines", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(express.static("public"));
